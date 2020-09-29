@@ -1,0 +1,48 @@
+{
+    "name": "enflow/livewire-twig",
+    "description": "Enabling Livewire in Twig templates",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michel Bardelmeijer",
+            "email": "michel@enflow.nl"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "livewire/livewire": "^2.2"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.3",
+        "rcrowe/twigbridge": "^0.12.2",
+        "friendsofphp/php-cs-fixer": "^2.16"
+    },
+    "suggest": {
+        "rcrowe/TwigBridge": "For adding Twig support to your Laravel application"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Enflow\\LivewireTwig\\LivewireTwigServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Enflow\\LivewireTwig\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Enflow\\LivewireTwig\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+    }
+}
