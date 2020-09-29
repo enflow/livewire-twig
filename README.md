@@ -23,7 +23,7 @@ This package only provides a wrapper for the `@livewireScripts`, `@livewireStyle
 You can register your Livewire components like normal. 
 
 ## Example
-```
+```twig
 {{ livewireStyles() }}
 
 {# The Twig version of '@livewire' #}
