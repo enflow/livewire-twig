@@ -1,7 +1,7 @@
 # Livewire for Twig
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/enflow/livewire-twig.svg?style=flat-square)](https://packagist.org/packages/enflow/livewire-twig)
-![GitHub Workflow Status](https://github.com/enflow-nl/livewire-twig/workflows/run-tests/badge.svg)
+![GitHub Workflow Status](https://github.com/enflow/livewire-twig/workflows/run-tests/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/enflow/livewire-twig.svg?style=flat-square)](https://packagist.org/packages/enflow/livewire-twig)
 
 The `enflow/livewire-twig` package provides the option to load Livewire components in your Twig templates.
