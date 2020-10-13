@@ -23,16 +23,62 @@ This package only provides a wrapper for the `@livewireScripts`, `@livewireStyle
 You can register your Livewire components like normal. 
 
 ## Example
+In the head
 ```twig
 {{ livewireStyles() }}
 
+{{ livewireScripts() }}
+```
+
+In the body
+```twig
 {# The Twig version of '@livewire' #}
 {% livewire counter %}
 
 {# If you wish to pass along variables to your component #}
 {% livewire counter with {'count': 3} %}
+```
 
-{{ livewireScripts() }}
+In resources/views/livewire/counter.twig
+```twig
+<div>
+    <div wire:click="add">+</div>
+    <div>{{ count }}</div>
+    <div wire:click="subtract">-</div>
+</div>
+```
+In app/Http/Livewire/Counter.php
+```php
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\Component;
+
+class Counter extends Component
+{
+    public $count;
+
+    public function mount($count = 1)
+    {
+        $this->count = $count;
+    }
+
+    public function add()
+    {
+        $this->count++;
+    }
+
+    public function subtract()
+    {
+        $this->count--;
+    }
+
+    public function render()
+    {
+        return view('livewire.counter');
+    }
+}
 ```
 
 ## Todo
