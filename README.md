@@ -22,15 +22,25 @@ If you're using another configuration, you may wish to register the extension ma
 This package only provides a wrapper for the `@livewireScripts`, `@livewireStyles` & `@livewire` calls. Everything else under the hood is powered by `livewire/livewire`.   
 You can register your Livewire components like normal. 
 
-## Example
-In the head
-```twig
-{{ livewireStyles() }}
+## Installation
 
-{{ livewireScripts() }}
+Add the following tags in the `head` tag, and before the end `body` tag in your template.
+
+```twig
+<html>
+<head>
+    ...
+    {{ livewireStyles() }}
+</head>
+<body>
+    ...
+    {{ livewireScripts() }}
+</body>
+</html>
 ```
 
-In the body
+In your body you may include the component like:
+
 ```twig
 {# The Twig version of '@livewire' #}
 {% livewire counter %}
@@ -39,7 +49,9 @@ In the body
 {% livewire counter with {'count': 3} %}
 ```
 
-In resources/views/livewire/counter.twig
+### Example
+
+Add the following to `resources/views/livewire/counter.twig`
 ```twig
 <div>
     <div wire:click="add">+</div>
@@ -47,7 +59,8 @@ In resources/views/livewire/counter.twig
     <div wire:click="subtract">-</div>
 </div>
 ```
-In app/Http/Livewire/Counter.php
+
+Add the following to `app/Http/Livewire/Counter.php`
 ```php
 <?php
 
@@ -57,12 +70,7 @@ use Livewire\Component;
 
 class Counter extends Component
 {
-    public $count;
-
-    public function mount($count = 1)
-    {
-        $this->count = $count;
-    }
+    public int $count = 1;
 
     public function add()
     {
@@ -72,11 +80,6 @@ class Counter extends Component
     public function subtract()
     {
         $this->count--;
-    }
-
-    public function render()
-    {
-        return view('livewire.counter');
     }
 }
 ```
