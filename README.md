@@ -6,8 +6,6 @@
 
 The `enflow/livewire-twig` package provides the option to load Livewire components in your Twig templates.
 
-**Note: this is very much a proof of concept at the moment.** 
-
 ## Installation
 You can install the package via composer:
 
