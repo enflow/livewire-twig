@@ -82,6 +82,9 @@ class Counter extends Component
 }
 ```
 
+## Caveats
+- Components with hyphens cannot be called like `{% livewire foo-bar %}` as Twig doesn't allow hyphens like that. We've added a workaround for this by allowing camel case: `{% livewire fooBar %}`
+
 ## Todo
 - [ ] Implement support for `key` tracking
 - [ ] Implement support for preserving child tracking

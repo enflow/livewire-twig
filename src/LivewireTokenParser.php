@@ -2,6 +2,7 @@
 
 namespace Enflow\LivewireTwig;
 
+use Illuminate\Support\Str;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
 
@@ -18,7 +19,7 @@ class LivewireTokenParser extends AbstractTokenParser
 
         $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
 
-        return new LivewireNode($component, $variables, $token->getLine(), $this->getTag());
+        return new LivewireNode(Str::kebab($component), $variables, $token->getLine(), $this->getTag());
     }
 
     public function getTag(): string
