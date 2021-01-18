@@ -45,6 +45,9 @@ In your body you may include the component like:
 
 {# If you wish to pass along variables to your component #}
 {% livewire counter with {'count': 3} %}
+
+{# To include a nested component (or dashes), you need to use '' #}
+{% livewire 'nested.component' %}
 ```
 
 ### Example
@@ -81,9 +84,6 @@ class Counter extends Component
     }
 }
 ```
-
-## Caveats
-- Components with hyphens cannot be called like `{% livewire foo-bar %}` as Twig doesn't allow hyphens like that. We've added a workaround for this by allowing camel case: `{% livewire fooBar %}`
 
 ## Todo
 - [ ] Implement support for `key` tracking
