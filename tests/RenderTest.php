@@ -31,6 +31,19 @@ class RenderTest extends TestCase
         $this->assertStringContainsString('Lorem ipsum!', $rendered); // Counter component title
     }
 
+    public function test_nested_component_correctly_renders()
+    {
+        Livewire::component('table', Table::class);
+        Livewire::component('table.row', TableRow::class);
+        Livewire::component('dashed-counter', Counter::class);
+
+        $rendered = view('nested-test')->render();
+
+        $this->assertStringContainsString('increment', $rendered);
+        $this->assertStringContainsString('Foo', $rendered);
+        $this->assertStringContainsString('Bar', $rendered);
+    }
+
     public function test_invalid_type_throws_exception()
     {
         $this->expectException(\ErrorException::class);
@@ -49,5 +62,25 @@ class Counter extends Component
     public function render()
     {
         return view('components.counter');
+    }
+}
+
+class Table extends Component
+{
+    public $elements;
+
+    public function render()
+    {
+        return view('components.table');
+    }
+}
+
+class TableRow extends Component
+{
+    public $element;
+
+    public function render()
+    {
+        return view('components.table.row');
     }
 }
