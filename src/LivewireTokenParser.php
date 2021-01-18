@@ -3,6 +3,7 @@
 namespace Enflow\LivewireTwig;
 
 use Illuminate\Support\Str;
+use Twig\Error\SyntaxError;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
 
@@ -10,7 +11,23 @@ class LivewireTokenParser extends AbstractTokenParser
 {
     public function parse(Token $token): LivewireNode
     {
-        $component = $this->parser->getStream()->expect(Token::NAME_TYPE)->getValue();
+        $componentNameToken = $this->parser->getStream()->next();
+
+        if ($componentNameToken->test(Token::NAME_TYPE) || $componentNameToken->test(Token::STRING_TYPE)) {
+            $component = $componentNameToken->getValue();
+        } else {
+            throw new SyntaxError(
+                sprintf(
+                    'Unexpected token "%s"%s ("%s" or "%s" expected).',
+                    Token::typeToEnglish($componentNameToken->getType()),
+                    $componentNameToken->getValue() ? sprintf(' of value "%s"', $componentNameToken->getValue()) : '',
+                    Token::typeToEnglish(Token::NAME_TYPE),
+                    Token::typeToEnglish(Token::STRING_TYPE)
+                ),
+                $componentNameToken->getLine(),
+                $this->parser->getStream()->getSourceContext()
+            );
+        }
 
         $variables = null;
         if ($this->parser->getStream()->nextIf(/* Token::NAME_TYPE */ 5, 'with')) {

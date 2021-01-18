@@ -1,0 +1,12 @@
+{% extends 'layout' %}
+
+{% set elements = [
+    {'id': 1, 'name': 'Foo'},
+    {'id': 2, 'name': 'Bar'},
+] %}
+
+{% block content %}
+    {% livewire 'dashed-counter' %}
+
+    {% livewire 'table' with {'elements' : elements} %}
+{% endblock %}
