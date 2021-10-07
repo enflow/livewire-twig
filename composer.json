@@ -16,7 +16,7 @@
         "orchestra/testbench": "^6.0",
         "phpunit/phpunit": "^9.3",
         "rcrowe/twigbridge": "^0.12.2",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "friendsofphp/php-cs-fixer": "^3.2"
     },
     "suggest": {
         "rcrowe/TwigBridge": "For adding Twig support to your Laravel application"
