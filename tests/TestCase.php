@@ -5,6 +5,7 @@ namespace Enflow\LivewireTwig\Test;
 use Enflow\LivewireTwig\LivewireTwigServiceProvider;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use TwigBridge\ServiceProvider as TwigServiceProvider;
 
 class TestCase extends BaseTestCase
 {
@@ -12,7 +13,7 @@ class TestCase extends BaseTestCase
     {
         return [
             LivewireServiceProvider::class,
-            \TwigBridge\ServiceProvider::class,
+            TwigServiceProvider::class,
             LivewireTwigServiceProvider::class,
         ];
     }

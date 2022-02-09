@@ -46,7 +46,7 @@ class RenderTest extends TestCase
 
     public function test_invalid_type_throws_exception()
     {
-        $this->expectException(\ErrorException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Unexpected token "number" of value "63" ("name" or "string" expected).');
         Livewire::component('counter', Counter::class);
 

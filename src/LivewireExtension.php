@@ -3,14 +3,16 @@
 namespace Enflow\LivewireTwig;
 
 use Livewire\Livewire;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class LivewireExtension extends \Twig\Extension\AbstractExtension
+class LivewireExtension extends AbstractExtension
 {
     public function getFunctions()
     {
         return [
-            new \Twig\TwigFunction('livewireStyles', [$this, 'livewireStyles'], ['is_safe' => ['html']]),
-            new \Twig\TwigFunction('livewireScripts', [$this, 'livewireScripts'], ['is_safe' => ['html']]),
+            new TwigFunction('livewireStyles', [$this, 'livewireStyles'], ['is_safe' => ['html']]),
+            new TwigFunction('livewireScripts', [$this, 'livewireScripts'], ['is_safe' => ['html']]),
         ];
     }
 
