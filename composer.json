@@ -9,17 +9,17 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.1",
         "livewire/livewire": "^2.2"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^9.3",
-        "rcrowe/twigbridge": "^0.12.2",
+        "orchestra/testbench": "^7.0",
+        "phpunit/phpunit": "^9.5",
+        "rcrowe/twigbridge": "^0.13.1",
         "friendsofphp/php-cs-fixer": "^3.2"
     },
     "suggest": {
-        "rcrowe/TwigBridge": "For adding Twig support to your Laravel application"
+        "rcrowe/twigbridge": "For adding Twig support to your Laravel application"
     },
     "config": {
         "sort-packages": true
