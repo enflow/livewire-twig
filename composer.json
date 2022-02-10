@@ -15,7 +15,7 @@
     "require-dev": {
         "orchestra/testbench": "^7.0",
         "phpunit/phpunit": "^9.5",
-        "rcrowe/twigbridge": "^0.13.0",
+        "rcrowe/twigbridge": "^0.13.1",
         "friendsofphp/php-cs-fixer": "^3.2"
     },
     "suggest": {
