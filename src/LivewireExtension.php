@@ -8,7 +8,7 @@ use Twig\TwigFunction;
 
 class LivewireExtension extends AbstractExtension
 {
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('livewireStyles', [$this, 'livewireStyles'], ['is_safe' => ['html']]),
@@ -26,7 +26,7 @@ class LivewireExtension extends AbstractExtension
         return Livewire::scripts();
     }
 
-    public function getTokenParsers()
+    public function getTokenParsers(): array
     {
         return [
             new LivewireTokenParser(),
