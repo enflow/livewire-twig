@@ -57,6 +57,7 @@ class RenderTest extends TestCase
 class Counter extends Component
 {
     public $count = 3;
+
     public $title = null;
 
     public function render()

@@ -22,7 +22,7 @@ class LivewireNode extends Node
     {
         $component = $this->getAttribute('component');
 
-        $compiler->raw("if (! isset(\$_instance)) {")
+        $compiler->raw('if (! isset($_instance)) {')
             ->outdent()
             ->raw("\$html = \Livewire\Livewire::mount('$component', ");
 
@@ -36,8 +36,8 @@ class LivewireNode extends Node
 
         $compiler->raw(")->html();\n")
             ->indent()
-            ->raw("}");
+            ->raw('}');
 
-        $compiler->write("echo \$html;");
+        $compiler->write('echo $html;');
     }
 }
