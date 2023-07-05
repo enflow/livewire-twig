@@ -87,7 +87,6 @@ class Counter extends Component
 
 ## Todo
 - [ ] Implement support for `key` tracking
-- [ ] Implement support for preserving child tracking
 - [ ] Moar tests.
 
 ## Testing

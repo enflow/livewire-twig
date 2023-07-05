@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Twig\Error\SyntaxError;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
+use Twig\Node\Expression\ArrayExpression;
 
 class LivewireTokenParser extends AbstractTokenParser
 {
@@ -29,9 +30,10 @@ class LivewireTokenParser extends AbstractTokenParser
             );
         }
 
-        $variables = null;
         if ($this->parser->getStream()->nextIf(/* Token::NAME_TYPE */ 5, 'with')) {
             $variables = $this->parser->getExpressionParser()->parseExpression();
+        } else {
+            $variables = new ArrayExpression([], $token->getLine());
         }
 
         $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
