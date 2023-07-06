@@ -1,0 +1,6 @@
+<div>
+    {{ counter }}
+    <div class="child">
+        {% livewire 'childcounter' with { 'count': 1, 'title': 'Child' } %}
+    </div>
+</div>
