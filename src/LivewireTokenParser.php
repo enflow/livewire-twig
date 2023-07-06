@@ -4,9 +4,9 @@ namespace Enflow\LivewireTwig;
 
 use Illuminate\Support\Str;
 use Twig\Error\SyntaxError;
+use Twig\Node\Expression\ArrayExpression;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
-use Twig\Node\Expression\ArrayExpression;
 
 class LivewireTokenParser extends AbstractTokenParser
 {

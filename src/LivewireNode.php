@@ -2,10 +2,10 @@
 
 namespace Enflow\LivewireTwig;
 
+use Livewire\LivewireBladeDirectives;
 use Twig\Compiler;
 use Twig\Node\Expression\AbstractExpression;
 use Twig\Node\Node;
-use Livewire\LivewireBladeDirectives;
 
 class LivewireNode extends Node
 {
@@ -24,7 +24,6 @@ class LivewireNode extends Node
             ->write('$_vars = ')->subcompile($expr)->raw(";\n")
             ->write("?>\n")
             ->write(LivewireBladeDirectives::livewire("'$component', \$_vars"))
-            ->write("<?php\n")
-          ;
+            ->write("<?php\n");
     }
 }

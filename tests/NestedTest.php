@@ -21,12 +21,14 @@ class NestedTest extends TestCase
 class NestedChilds extends Component
 {
     public $elements;
+
     public $counter = 0;
 
     public function increment()
     {
-      $this->counter++;
+        $this->counter++;
     }
+
     public function render()
     {
         return view('components.haschilds');
@@ -35,17 +37,20 @@ class NestedChilds extends Component
 
 class Child extends Component
 {
-    static $renderedCount = 0;
+    public static $renderedCount = 0;
+
     public $count = 1;
 
     public function incrementChild()
     {
-      $this->count++;
+        $this->count++;
     }
+
     public function render()
     {
         static::$renderedCount++;
         $this->count = static::$renderedCount;
+
         return view('components.counter');
     }
 }
