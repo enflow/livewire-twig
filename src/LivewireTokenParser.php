@@ -5,6 +5,7 @@ namespace Enflow\LivewireTwig;
 use Illuminate\Support\Str;
 use Twig\Error\SyntaxError;
 use Twig\Node\Expression\ArrayExpression;
+use Twig\Node\Expression\ConstantExpression;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
 
@@ -12,33 +13,32 @@ class LivewireTokenParser extends AbstractTokenParser
 {
     public function parse(Token $token): LivewireNode
     {
-        $componentNameToken = $this->parser->getStream()->next();
+        $lineno = $token->getLine();
+        $stream = $this->parser->getStream();
+        $component = $this->parser->getExpressionParser()->parseExpression();
 
-        if ($componentNameToken->test(Token::NAME_TYPE) || $componentNameToken->test(Token::STRING_TYPE)) {
-            $component = $componentNameToken->getValue();
-        } else {
-            throw new SyntaxError(
-                sprintf(
-                    'Unexpected token "%s"%s ("%s" or "%s" expected).',
-                    Token::typeToEnglish($componentNameToken->getType()),
-                    $componentNameToken->getValue() ? sprintf(' of value "%s"', $componentNameToken->getValue()) : '',
-                    Token::typeToEnglish(Token::NAME_TYPE),
-                    Token::typeToEnglish(Token::STRING_TYPE)
-                ),
-                $componentNameToken->getLine(),
-                $this->parser->getStream()->getSourceContext()
-            );
+        $end = false;
+        $variables = new ArrayExpression([], $token->getLine());
+        $key = new ConstantExpression('', $lineno);
+        while (!$end) {
+            $n = $stream->next();
+            if ($n->test(Token::NAME_TYPE, 'with')) {
+                $variables = $this->parser->getExpressionParser()->parseExpression();
+            }
+            elseif ($n->test(Token::NAME_TYPE, 'key')) {
+                $this->parser->getStream()->expect(Token::PUNCTUATION_TYPE, '(');
+                $key = $this->parser->getExpressionParser()->parseExpression();
+                $this->parser->getStream()->expect(Token::PUNCTUATION_TYPE, ')');
+            }
+            elseif ($n->test(Token::BLOCK_END_TYPE)) {
+                $end = true;
+            }
+            else {
+                throw new SyntaxError(sprintf('Unexpected end of template. Twig was expecting the end of the directive starting at line %d).', $lineno), $stream->getCurrent()->getLine(), $stream->getSourceContext());
+            }
         }
-
-        if ($this->parser->getStream()->nextIf(/* Token::NAME_TYPE */ 5, 'with')) {
-            $variables = $this->parser->getExpressionParser()->parseExpression();
-        } else {
-            $variables = new ArrayExpression([], $token->getLine());
-        }
-
-        $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
-
-        return new LivewireNode(Str::kebab($component), $variables, $token->getLine(), $this->getTag());
+        $attrs = ['variables' => $variables, 'key' => $key];
+        return new LivewireNode($component, $attrs, $token->getLine(), $this->getTag());
     }
 
     public function getTag(): string

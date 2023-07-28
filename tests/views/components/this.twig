@@ -1,0 +1,8 @@
+{% if title %}
+    <h1>{{ title }}</h1>
+{% endif %}
+
+<button wire:click="increment">+</button>
+<h2>{{ count }}</h2>
+<button wire:click="decrement">-</button>
+<script> {% this %}.value </script>

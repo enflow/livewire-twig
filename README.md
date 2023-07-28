@@ -6,6 +6,10 @@
 
 The `enflow/livewire-twig` package provides the option to load Livewire components in your Twig templates.
 
+## Update notes
+This version supports Livewire 3. 
+The name argument for {% livewire %} and the other directives is now interpreted as an expression, allowing the use of variables or Twig expressions as a name. Note that for this reason a constant name now must be enclosed in quotes.
+
 ## Installation
 You can install the package via composer:
 
@@ -17,12 +21,10 @@ composer require enflow/livewire-twig
 The Twig extension will automatically register when `rcrowe/twigbridge` is used.
 If you're using another configuration, you may wish to register the extension manually by loading the extension `Enflow\LivewireTwig\LivewireExtension`.
 
-This package only provides a wrapper for the `@livewireScripts`, `@livewireStyles` & `@livewire` calls. Everything else under the hood is powered by `livewire/livewire`.   
+This package provides wrappers for the `@livewireScripts`, `@livewireStyles`, `@livewireScriptConfig`, `@livewire`, `@entangle`, `@this` and `@persist`,  directives. Everything else under the hood is powered by `livewire/livewire`.   
 You can register your Livewire components like normal. 
 
-## Installation
-
-Add the following tags in the `head` tag, and before the end `body` tag in your template.
+To use Livewire, add the following tags in the `head` tag, and before the end `body` tag in your template.
 
 ```twig
 <html>
@@ -41,13 +43,32 @@ In your body you may include the component like:
 
 ```twig
 {# The Twig version of '@livewire' #}
-{% livewire counter %}
+{% livewire 'counter' %}
 
 {# If you wish to pass along variables to your component #}
-{% livewire counter with {'count': 3} %}
+{% livewire 'counter' with {'count': 3} %}
 
 {# To include a nested component (or dashes), you need to use '' #}
 {% livewire 'nested.component' %}
+
+{# To use key tracking, you need to use key(<expression>) #}
+{% livewire 'counter' key('counterkey') %}
+
+{# The Twig version of '@persist' #}
+{% persist 'name' %}
+<div>
+    ...
+</div>
+{% endpersist %}
+
+{# The Twig version of '@entangle' (as of Livewire 3.01 poorly documented, need to check the source code) #}
+{% entangle 'expression' %}
+
+{# The Twig version of '@this' (Can only be used after Livewire initialization is complete) #}
+{% this %}
+
+{# The Twig version of '@livewireScriptConfig' (as of Livewire 3.01 poorly documented, need to check the source code) #}
+{{ livewireScriptConfig(<options>) }}
 ```
 
 ### Example
@@ -86,7 +107,6 @@ class Counter extends Component
 ```
 
 ## Todo
-- [ ] Implement support for `key` tracking
 - [ ] Moar tests.
 
 ## Testing
