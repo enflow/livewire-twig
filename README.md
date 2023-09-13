@@ -6,8 +6,13 @@
 
 The `enflow/livewire-twig` package provides the option to load Livewire components in your Twig templates.
 
-## Update notes
-This version supports Livewire 3. 
+## Versions
+
+### <= 3.x.x
+Version 3.x.x supports Livewire 2.
+
+### >= 4.x.x
+Version 4.xxx supports Livewire 3.
 The name argument for {% livewire %} and the other directives is now interpreted as an expression, allowing the use of variables or Twig expressions as a name. Note that for this reason a constant name now must be enclosed in quotes.
 
 ## Installation
