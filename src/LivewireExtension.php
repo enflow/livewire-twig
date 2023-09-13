@@ -63,10 +63,10 @@ class LivewireExtension extends AbstractExtension
     public function getTokenParsers(): array
     {
         return [
-            new LivewireTokenParser(),
-            new PersistTokenParser(),
-            new ThisTokenParser(),
-            new EntangleTokenParser()
+            new TokenParsers\LivewireTokenParser(),
+            new TokenParsers\PersistTokenParser(),
+            new TokenParsers\ThisTokenParser(),
+            new TokenParsers\EntangleTokenParser()
         ];
     }
 }

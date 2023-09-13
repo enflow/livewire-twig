@@ -1,7 +1,8 @@
 <?php
 
-namespace Enflow\LivewireTwig;
+namespace Enflow\LivewireTwig\TokenParsers;
 
+use Enflow\LivewireTwig\Nodes\LivewireNode;
 use Illuminate\Support\Str;
 use Twig\Error\SyntaxError;
 use Twig\Node\Expression\ArrayExpression;

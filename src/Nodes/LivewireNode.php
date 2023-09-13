@@ -1,9 +1,9 @@
 <?php
 
-namespace Enflow\LivewireTwig;
+namespace Enflow\LivewireTwig\Nodes;
 
+use Enflow\LivewireTwig\LivewireExtension;
 use Twig\Compiler;
-use Twig\Node\Expression\AbstractExpression;
 use Twig\Node\Node;
 
 class LivewireNode extends Node
@@ -17,6 +17,7 @@ class LivewireNode extends Node
     public function compile(Compiler $compiler)
     {
         $ext = $compiler->getEnvironment()->getExtension(LivewireExtension::class);
+
         $component = $this->getAttribute('component');
         $expr = $this->getNode('variables');
         $key = $this->getNode('key');

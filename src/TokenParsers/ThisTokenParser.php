@@ -1,7 +1,8 @@
 <?php
 
-namespace Enflow\LivewireTwig;
+namespace Enflow\LivewireTwig\TokenParsers;
 
+use Enflow\LivewireTwig\Nodes\ThisNode;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
 

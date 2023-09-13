@@ -1,7 +1,8 @@
 <?php
 
-namespace Enflow\LivewireTwig;
+namespace Enflow\LivewireTwig\Nodes;
 
+use Enflow\LivewireTwig\LivewireExtension;
 use Twig\Compiler;
 use Twig\Node\Node;
 

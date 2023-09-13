@@ -1,7 +1,8 @@
 <?php
 
-namespace Enflow\LivewireTwig;
+namespace Enflow\LivewireTwig\TokenParsers;
 
+use Enflow\LivewireTwig\Nodes\PersistNode;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
 
@@ -11,7 +12,7 @@ class PersistTokenParser extends AbstractTokenParser
     {
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
-        $name = $this->parser->getExpressionParser()->parseExpression(); //$stream->next();
+        $name = $this->parser->getExpressionParser()->parseExpression();
         $stream->expect(Token::BLOCK_END_TYPE);
         $body = $this->parser->subparse([$this, 'endPersist']);
         $stream->next();

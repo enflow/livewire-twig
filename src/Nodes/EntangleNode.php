@@ -1,6 +1,6 @@
 <?php
 
-namespace Enflow\LivewireTwig;
+namespace Enflow\LivewireTwig\Nodes;
 
 use Twig\Compiler;
 use Twig\Node\Expression\NameExpression;
