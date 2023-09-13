@@ -20,10 +20,11 @@ class PersistTokenParser extends AbstractTokenParser
         return new PersistNode([$body], ['name' => $name], $lineno, $this->getTag());
     }
 
-    public function endPersist(Token $token)
+    public function endPersist(Token $token): bool
     {
         return $token->test(['endpersist']);
     }
+
     public function getTag(): string
     {
         return 'persist';

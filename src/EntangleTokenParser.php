@@ -16,6 +16,7 @@ class EntangleTokenParser extends AbstractTokenParser
 
         return new EntangleNode(['EntangleValue' => $entVar], [], $lineno, $this->getTag());
     }
+
     public function getTag(): string
     {
         return 'entangle';

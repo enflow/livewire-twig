@@ -10,8 +10,8 @@ class EntangleNode extends Node
 {
     public function compile(Compiler $compiler)
     {
-        $ext = $compiler->getEnvironment()->getExtension(LivewireExtension::class);
         $livewire = new NameExpression("__livewire", $this->lineno);
+
         $compiler
             ->write('$__livewire = ')->subcompile($livewire)->raw(";\n")
             ->write('$expression = ')->subcompile($this->getNode('EntangleValue'))->raw(";\n")

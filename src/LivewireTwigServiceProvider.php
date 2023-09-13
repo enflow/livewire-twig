@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Blade;
 
 class LivewireTwigServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $this->app->afterResolving('twig', fn () => $this->app['twig']->addExtension(new LivewireExtension()));
     }

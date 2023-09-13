@@ -20,23 +20,21 @@ class LivewireTokenParser extends AbstractTokenParser
         $end = false;
         $variables = new ArrayExpression([], $token->getLine());
         $key = new ConstantExpression('', $lineno);
-        while (!$end) {
+        while (! $end) {
             $n = $stream->next();
             if ($n->test(Token::NAME_TYPE, 'with')) {
                 $variables = $this->parser->getExpressionParser()->parseExpression();
-            }
-            elseif ($n->test(Token::NAME_TYPE, 'key')) {
+            } elseif ($n->test(Token::NAME_TYPE, 'key')) {
                 $this->parser->getStream()->expect(Token::PUNCTUATION_TYPE, '(');
                 $key = $this->parser->getExpressionParser()->parseExpression();
                 $this->parser->getStream()->expect(Token::PUNCTUATION_TYPE, ')');
-            }
-            elseif ($n->test(Token::BLOCK_END_TYPE)) {
+            } elseif ($n->test(Token::BLOCK_END_TYPE)) {
                 $end = true;
-            }
-            else {
+            } else {
                 throw new SyntaxError(sprintf('Unexpected end of template. Twig was expecting the end of the directive starting at line %d).', $lineno), $stream->getCurrent()->getLine(), $stream->getSourceContext());
             }
         }
+
         $attrs = ['variables' => $variables, 'key' => $key];
         return new LivewireNode($component, $attrs, $token->getLine(), $this->getTag());
     }

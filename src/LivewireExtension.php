@@ -2,6 +2,7 @@
 
 namespace Enflow\LivewireTwig;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -9,8 +10,8 @@ use Livewire\Mechanisms\FrontendAssets\FrontendAssets;
 
 class LivewireExtension extends AbstractExtension
 {
-    protected $calls;
-    protected $dirs = [
+    protected Collection $calls;
+    protected array $dirs = [
         'livewireScripts',
         'livewireScriptConfig',
         'livewireStyles',
@@ -23,11 +24,12 @@ class LivewireExtension extends AbstractExtension
 
     public function __construct()
     {
-        $dirs = Blade::getCustomDirectives();
-        $this->calls = collect($this->dirs)->mapWithKeys(function($e) use ($dirs) { return [$e => $dirs[$e]]; });
+        $customDirectives = Blade::getCustomDirectives();
+
+        $this->calls = collect($this->dirs)->mapWithKeys(fn($e) => [$e => $customDirectives[$e]]);
     }
 
-    public function callDirective(string $directive, array $args = []) : string
+    public function callDirective(string $directive, array $args = []): string
     {
         $call = $this->calls[$directive];
         $r = call_user_func_array($call, $args);
@@ -43,15 +45,17 @@ class LivewireExtension extends AbstractExtension
         ];
     }
 
-    public function livewireStyles($args = '')
+    public function livewireStyles($args = ''): string
     {
         return FrontendAssets::styles($args);
     }
-    public function livewireScripts($args = '')
+
+    public function livewireScripts($args = ''): string
     {
         return FrontendAssets::scripts($args);
     }
-    public function livewireScriptConfig($args = [])
+
+    public function livewireScriptConfig($args = []): string
     {
         return FrontendAssets::scriptConfig($args);
     }

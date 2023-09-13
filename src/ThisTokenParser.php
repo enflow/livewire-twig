@@ -15,6 +15,7 @@ class ThisTokenParser extends AbstractTokenParser
 
         return new ThisNode([], [], $lineno, $this->getTag());
     }
+
     public function getTag(): string
     {
         return 'this';
