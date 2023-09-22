@@ -36,6 +36,7 @@ class LivewireTokenParser extends AbstractTokenParser
         return (match ($type) {
             'this' => function () use ($stream, $lineno) {
                 $stream->expect(Token::BLOCK_END_TYPE); // Expect the end block
+
                 return new ThisNode([], [], $lineno, $this->getTag());
             },
 
@@ -54,14 +55,14 @@ class LivewireTokenParser extends AbstractTokenParser
                 $stream->expect(Token::BLOCK_END_TYPE);
 
                 // Parse the body until the 'endpersist' tag.
-                $body = $this->parser->subparse(function (Token $token) use ($stream) {
+                $body = $this->parser->subparse(function (Token $token) {
                     return $token->test('livewire');
                 }, true);
 
                 // Now, since we know we're at a 'livewire.' token, we should expect the 'endpersist' after it.
                 $stream->expect(Token::PUNCTUATION_TYPE, '.');
 
-                if (!$stream->test(Token::NAME_TYPE, 'endpersist')) {
+                if (! $stream->test(Token::NAME_TYPE, 'endpersist')) {
                     throw new SyntaxError('Expected the "endpersist" tag.', $stream->getCurrent()->getLine(), $stream->getSourceContext());
                 }
 
@@ -95,10 +96,11 @@ class LivewireTokenParser extends AbstractTokenParser
                 $stream->expect(Token::BLOCK_END_TYPE); // Expect the end block
 
                 $attrs = ['variables' => $variables, 'key' => $key];
+
                 return new LivewireNode($component, $attrs, $lineno, $this->getTag());
             },
 
-            default => fn() => throw new SyntaxError(sprintf('Unexpected token after "livewire.". Expected %s but got "%s".', implode(' or ', $this->types), $type), $lineno, $stream->getSourceContext()),
+            default => fn () => throw new SyntaxError(sprintf('Unexpected token after "livewire.". Expected %s but got "%s".', implode(' or ', $this->types), $type), $lineno, $stream->getSourceContext()),
         })();
     }
 
