@@ -13,7 +13,10 @@ Version 3.x.x supports Livewire 2.
 
 ### >= 4.x.x
 Version 4.xxx supports Livewire 3.
-The name argument for {% livewire %} and the other directives is now interpreted as an expression, allowing the use of variables or Twig expressions as a name. Note that for this reason a constant name now must be enclosed in quotes.
+
+This version changes from the `{% livewire.component test %}` syntax to the `{% livewire.component 'test' %}` syntax.
+
+The name argument for {% livewire.component %} and the other directives is now interpreted as an expression, allowing the use of variables or Twig expressions as a name. Note that for this reason a constant name now must be enclosed in quotes.
 
 ## Installation
 You can install the package via composer:
@@ -48,29 +51,29 @@ In your body you may include the component like:
 
 ```twig
 {# The Twig version of '@livewire' #}
-{% livewire 'counter' %}
+{% livewire.component 'counter' %}
 
 {# If you wish to pass along variables to your component #}
-{% livewire 'counter' with {'count': 3} %}
+{% livewire.component 'counter' with {'count': 3} %}
 
 {# To include a nested component (or dashes), you need to use '' #}
-{% livewire 'nested.component' %}
+{% livewire.component 'nested.component' %}
 
 {# To use key tracking, you need to use key(<expression>) #}
-{% livewire 'counter' key('counterkey') %}
+{% livewire.component 'counter' key('counterkey') %}
 
 {# The Twig version of '@persist' #}
-{% persist 'name' %}
+{% livewire.persist 'name' %}
 <div>
     ...
 </div>
-{% endpersist %}
+{% livewire.endpersist %}
 
 {# The Twig version of '@entangle' (as of Livewire 3.01 poorly documented, need to check the source code) #}
-{% entangle 'expression' %}
+{% livewire.entangle 'expression' %}
 
 {# The Twig version of '@this' (Can only be used after Livewire initialization is complete) #}
-{% this %}
+{% livewire.this %}
 
 {# The Twig version of '@livewireScriptConfig' (as of Livewire 3.01 poorly documented, need to check the source code) #}
 {{ livewireScriptConfig(<options>) }}

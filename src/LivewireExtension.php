@@ -15,23 +15,14 @@ class LivewireExtension extends AbstractExtension
         'livewireScripts',
         'livewireScriptConfig',
         'livewireStyles',
-        'this',
         'livewire',
-        'persist',
-        'endpersist',
-        'entangle'
     ];
-
-    public function __construct()
-    {
-        $customDirectives = Blade::getCustomDirectives();
-
-        $this->calls = collect($this->dirs)->mapWithKeys(fn($e) => [$e => $customDirectives[$e]]);
-    }
 
     public function callDirective(string $directive, array $args = []): string
     {
-        $call = $this->calls[$directive];
+        $directives = Blade::getCustomDirectives();
+        $call = $directives[$directive] ?? null;
+
         $r = call_user_func_array($call, $args);
         return "?> $r <?php\n";
     }
@@ -63,10 +54,7 @@ class LivewireExtension extends AbstractExtension
     public function getTokenParsers(): array
     {
         return [
-            new TokenParsers\LivewireTokenParser(),
-            new TokenParsers\PersistTokenParser(),
-            new TokenParsers\ThisTokenParser(),
-            new TokenParsers\EntangleTokenParser()
+            new LivewireTokenParser(),
         ];
     }
 }

@@ -1,9 +1,9 @@
 {% extends 'layout' %}
 
 {% block content %}
-    {% livewire 'counter' %}
+    {% livewire.component 'counter' %}
 
-    {% livewire 'counter' with {'count': 3} %}
+    {% livewire.component 'counter' with {'count': 3} %}
 
-    {% livewire 'counter' with {'count': 3, 'title': 'Lorem ipsum!'} %}
+    {% livewire.component 'counter' with {'count': 3, 'title': 'Lorem ipsum!'} %}
 {% endblock %}

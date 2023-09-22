@@ -6,7 +6,7 @@
 ] %}
 
 {% block content %}
-    {% livewire 'dashed-counter' %}
+    {% livewire.component 'dashed-counter' %}
 
-    {% livewire 'table' with {'elements' : elements} %}
+    {% livewire.component 'table' with {'elements' : elements} %}
 {% endblock %}

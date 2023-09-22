@@ -69,6 +69,14 @@ class RenderTest extends TestCase
         $this->assertStringContainsString('window.Livewire.find(\'', $rendered);
     }
 
+    public function test_persist()
+    {
+        Livewire::component('persist', Persist::class);
+
+        $rendered = view('persist-test')->render();
+        $this->assertStringContainsString('x-persist=', $rendered);
+    }
+
     public function test_config()
     {
         Livewire::component('this', This::class);
@@ -109,30 +117,29 @@ class TableRow extends Component
         return view('components.table.row');
     }
 }
+
 class This extends Component
 {
-    public $count = 1;
- 
-    public function increment()
-    {
-        $this->count++;
-    }
- 
-    public function decrement()
-    {
-        $this->count--;
-    }
- 
     public function render()
     {
         return view('components.this');
     }
 }
+
 class Entangle extends Component
 {
     public $entangle = 1;
+
     public function render()
     {
         return view('components.entangle');
+    }
+}
+
+class Persist extends Component
+{
+    public function render()
+    {
+        return view('components.persist');
     }
 }
