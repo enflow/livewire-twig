@@ -33,6 +33,7 @@ class LivewireTokenParser extends AbstractTokenParser
         // Detect the type after the dot
         $type = $stream->expect(Token::NAME_TYPE)->getValue();
 
+        // Go into the type specific logic
         return (match ($type) {
             'this' => function () use ($stream, $lineno) {
                 $stream->expect(Token::BLOCK_END_TYPE); // Expect the end block
@@ -54,18 +55,15 @@ class LivewireTokenParser extends AbstractTokenParser
                 $stream->expect(Token::BLOCK_END_TYPE);
 
                 // Parse the body until the 'endpersist' tag.
-                $body = $this->parser->subparse(function (Token $token) use ($stream) {
-                    return $token->test('livewire');
-                }, true);
+                $body = $this->parser->subparse(fn(Token $token) => $token->test('livewire'), true);
 
                 // Now, since we know we're at a 'livewire.' token, we should expect the 'endpersist' after it.
                 $stream->expect(Token::PUNCTUATION_TYPE, '.');
 
-                if (!$stream->test(Token::NAME_TYPE, 'endpersist')) {
-                    throw new SyntaxError('Expected the "endpersist" tag.', $stream->getCurrent()->getLine(), $stream->getSourceContext());
-                }
+                // Now, we should expect the 'endpersist' name.
+                $stream->expect(Token::NAME_TYPE, 'endpersist');
 
-                $stream->next();  // Consume the 'endpersist' token
+                // We can expect the closing block now: `%}`
                 $stream->expect(Token::BLOCK_END_TYPE);
 
                 return new PersistNode([$body], ['name' => $name], $lineno, $this->getTag());

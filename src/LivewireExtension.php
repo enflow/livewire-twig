@@ -10,14 +10,6 @@ use Livewire\Mechanisms\FrontendAssets\FrontendAssets;
 
 class LivewireExtension extends AbstractExtension
 {
-    protected Collection $calls;
-    protected array $dirs = [
-        'livewireScripts',
-        'livewireScriptConfig',
-        'livewireStyles',
-        'livewire',
-    ];
-
     public function callDirective(string $directive, array $args = []): string
     {
         $directives = Blade::getCustomDirectives();
