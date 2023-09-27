@@ -10,12 +10,12 @@
     ],
     "require": {
         "php": "^8.2",
-        "livewire/livewire": "^2.2"
+        "livewire/livewire": "^3.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
         "orchestra/testbench": "^8.0",
-        "phpunit/phpunit": "^10.0",
+        "phpunit/phpunit": "^10.1",
         "rcrowe/twigbridge": "^0.14.1"
     },
     "suggest": {

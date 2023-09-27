@@ -1,0 +1,6 @@
+{% extends 'layout' %}
+
+{% block content %}
+    {% livewire.component 'persist' %}
+    {{ livewireScriptConfig({'config': true}) }}
+{% endblock %}

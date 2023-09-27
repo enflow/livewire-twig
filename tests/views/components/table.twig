@@ -1,5 +1,5 @@
 <table>
     {% for element in elements %}
-        {% livewire 'table.row' with { 'element': element } %}
+        {% livewire.component 'table.row' with { 'element': element } %}
     {% endfor %}
 </table>
