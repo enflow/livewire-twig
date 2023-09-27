@@ -2,11 +2,10 @@
 
 namespace Enflow\LivewireTwig;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
+use Livewire\Mechanisms\FrontendAssets\FrontendAssets;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use Livewire\Mechanisms\FrontendAssets\FrontendAssets;
 
 class LivewireExtension extends AbstractExtension
 {
@@ -16,6 +15,7 @@ class LivewireExtension extends AbstractExtension
         $call = $directives[$directive] ?? null;
 
         $r = call_user_func_array($call, $args);
+
         return "?> $r <?php\n";
     }
 
