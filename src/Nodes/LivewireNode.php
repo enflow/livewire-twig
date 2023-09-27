@@ -21,7 +21,7 @@ class LivewireNode extends Node
         $component = $this->getAttribute('component');
         $expr = $this->getNode('variables');
         $key = $this->getNode('key');
-        $hasKey = !$key->hasAttribute('value') || $key->getAttribute('value') !== '';
+        $hasKey = ! $key->hasAttribute('value') || $key->getAttribute('value') !== '';
 
         $compiler
             ->write('$_name = ')->subcompile($component)->raw(";\n")

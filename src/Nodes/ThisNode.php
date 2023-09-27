@@ -10,7 +10,7 @@ class ThisNode extends Node
 {
     public function compile(Compiler $compiler)
     {
-        $livewire = new NameExpression("__livewire", $this->lineno);
+        $livewire = new NameExpression('__livewire', $this->lineno);
 
         $compiler
             ->write('$_instance = ')->subcompile($livewire)->raw(";\n")
