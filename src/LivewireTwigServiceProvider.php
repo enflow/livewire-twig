@@ -11,6 +11,6 @@ class LivewireTwigServiceProvider extends ServiceProvider
     {
         $this->app->afterResolving('twig', fn () => $this->app['twig']->addExtension(new LivewireExtension()));
 
-        $this->app->singleton(DeterministicBladeKeys::class, fn() => new NoneDeterministicTwigKeys());
+        $this->app->singleton(DeterministicBladeKeys::class, fn () => new NoneDeterministicTwigKeys());
     }
 }

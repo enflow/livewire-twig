@@ -8,7 +8,7 @@ use Twig\Node\Node;
 
 class LivewireNode extends Node
 {
-    public function __construct(Node $component, array $attributes, int $lineno, string $tag = null)
+    public function __construct(Node $component, array $attributes, int $lineno, ?string $tag = null)
     {
         $nodes = ['variables' => $attributes['variables'], 'key' => $attributes['key']];
         parent::__construct($nodes, ['component' => $component], $lineno, $tag);
