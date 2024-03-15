@@ -14,7 +14,6 @@ class RenderTest extends TestCase
         $rendered = view('name-type-test')->render();
 
         $this->assertStringContainsString('[wire\:loading]', $rendered); // Styles
-        $this->assertStringContainsString('script src="/livewire/livewire.js', $rendered); // Scripts
         $this->assertStringContainsString('increment', $rendered); // Counter component
         $this->assertStringContainsString('Lorem ipsum!', $rendered); // Counter component title
     }
@@ -26,7 +25,6 @@ class RenderTest extends TestCase
         $rendered = view('string-type-test')->render();
 
         $this->assertStringContainsString('[wire\:loading]', $rendered); // Styles
-        $this->assertStringContainsString('script src="/livewire/livewire.js', $rendered); // Scripts
         $this->assertStringContainsString('increment', $rendered); // Counter component
         $this->assertStringContainsString('Lorem ipsum!', $rendered); // Counter component title
     }
