@@ -46,7 +46,7 @@ class LivewireExtension extends AbstractExtension
     public function getTokenParsers(): array
     {
         return [
-            new LivewireTokenParser(),
+            new LivewireTokenParser,
         ];
     }
 }
