@@ -10,14 +10,14 @@
     ],
     "require": {
         "php": "^8.3",
-        "livewire/livewire": "^3.0"
+        "livewire/livewire": "^3.0",
+        "twig/twig": "<=3.20.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
         "orchestra/testbench": "^9.0|^10.0",
         "phpunit/phpunit": "^11.0",
-        "rcrowe/twigbridge": "^0.14.1",
-        "twig/twig": "<=3.20.0"
+        "rcrowe/twigbridge": "^0.14.1"
     },
     "suggest": {
         "rcrowe/twigbridge": "For adding Twig support to your Laravel application"
