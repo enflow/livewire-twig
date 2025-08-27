@@ -27,7 +27,6 @@ class LivewireTokenParser extends AbstractTokenParser
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
 
-        // Expect the '.' after `livewire`. Twig 3.21.0 changes from PUNCTUATION_TYPE to OPERATOR_TYPE for '.'
         $stream->expect(Token::OPERATOR_TYPE, '.');
 
         // Detect the type after the dot
@@ -59,7 +58,7 @@ class LivewireTokenParser extends AbstractTokenParser
                 $body = $this->parser->subparse(fn (Token $token) => $token->test('livewire'), true);
 
                 // Now, since we know we're at a 'livewire.' token, we should expect the 'endpersist' after it.
-                $stream->expect(Token::PUNCTUATION_TYPE, '.');
+                $stream->expect(Token::OPERATOR_TYPE, '.');
 
                 // Now, we should expect the 'endpersist' name.
                 $stream->expect(Token::NAME_TYPE, 'endpersist');
