@@ -17,7 +17,7 @@
         "laravel/pint": "^1.0",
         "orchestra/testbench": "^9.0|^10.0",
         "phpunit/phpunit": "^11.0",
-        "rcrowe/twigbridge": "^0.14.1"
+        "rcrowe/twigbridge": "^0.14.6"
     },
     "suggest": {
         "rcrowe/twigbridge": "For adding Twig support to your Laravel application"
