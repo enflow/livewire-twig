@@ -27,8 +27,8 @@ class LivewireTokenParser extends AbstractTokenParser
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
 
-        // Expect the '.' after `livewire`
-        $stream->expect(Token::PUNCTUATION_TYPE, '.');
+        // Expect the '.' after `livewire`. Twig 3.21.0 changes from PUNCTUATION_TYPE to OPERATOR_TYPE for '.'
+        $stream->expect(Token::OPERATOR_TYPE, '.');
 
         // Detect the type after the dot
         $type = $stream->expect(Token::NAME_TYPE)->getValue();
