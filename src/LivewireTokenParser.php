@@ -41,7 +41,7 @@ class LivewireTokenParser extends AbstractTokenParser
             },
 
             'entangle' => function () use ($stream, $lineno) {
-                $entVar = $this->parser->getExpressionParser()->parseExpression();
+                $entVar = $this->parser->parseExpression();
                 $stream->expect(Token::BLOCK_END_TYPE);
 
                 return new EntangleNode(['EntangleValue' => $entVar], [], $lineno, $this->getTag());
@@ -49,7 +49,7 @@ class LivewireTokenParser extends AbstractTokenParser
 
             'persist' => function () use ($stream, $lineno) {
                 // Parse the name.
-                $name = $this->parser->getExpressionParser()->parseExpression();
+                $name = $this->parser->parseExpression();
 
                 // Expect the end block for the start tag.
                 $stream->expect(Token::BLOCK_END_TYPE);
@@ -71,7 +71,7 @@ class LivewireTokenParser extends AbstractTokenParser
 
             'component' => function () use ($stream, $lineno) {
                 // Proceed with parsing the livewire.component
-                $component = $this->parser->getExpressionParser()->parseExpression();
+                $component = $this->parser->parseExpression();
 
                 $variables = new ArrayExpression([], $lineno);
                 $key = new ConstantExpression('', $lineno);
@@ -79,11 +79,11 @@ class LivewireTokenParser extends AbstractTokenParser
                 while (! $stream->test(Token::BLOCK_END_TYPE)) {
                     if ($stream->test(Token::NAME_TYPE, 'with')) {
                         $stream->next();  // Consume the 'with' token
-                        $variables = $this->parser->getExpressionParser()->parseExpression();
+                        $variables = $this->parser->parseExpression();
                     } elseif ($stream->test(Token::NAME_TYPE, 'key')) {
                         $stream->next();  // Consume the 'key' token
                         $stream->expect(Token::PUNCTUATION_TYPE, '(');
-                        $key = $this->parser->getExpressionParser()->parseExpression();
+                        $key = $this->parser->parseExpression();
                         $stream->expect(Token::PUNCTUATION_TYPE, ')');
                     } else {
                         throw new SyntaxError(sprintf('Unexpected token in livewire tag. Twig was expecting the end of the directive starting at line %d).', $lineno), $lineno, $stream->getSourceContext());
