@@ -82,7 +82,7 @@ class LivewireTokenParser extends AbstractTokenParser
                         $variables = $this->parser->parseExpression();
                     } elseif ($stream->test(Token::NAME_TYPE, 'key')) {
                         $stream->next();  // Consume the 'key' token
-                        $stream->expect(Token::PUNCTUATION_TYPE, '(');
+                        $stream->expect(Token::OPERATOR_TYPE, '(');
                         $key = $this->parser->parseExpression();
                         $stream->expect(Token::PUNCTUATION_TYPE, ')');
                     } else {

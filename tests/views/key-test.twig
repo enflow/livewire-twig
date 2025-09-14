@@ -1,0 +1,10 @@
+{% extends 'layout' %}
+
+{% block content %}
+    {% livewire.component 'counter' key('fixed-key') %}
+
+    {% set variableKey = 'variable-key' %}
+    {% livewire.component 'counter' key(variableKey) %}
+
+    {% livewire.component 'counter' with {'count': 3, 'title': 'Lorem ipsum!'} key('fixed-key-with-variables-as-well') %}
+{% endblock %}

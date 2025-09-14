@@ -42,6 +42,15 @@ class RenderTest extends TestCase
         $this->assertStringContainsString('Bar', $rendered);
     }
 
+    public function test_key_renders_correctly()
+    {
+        $this->expectNotToPerformAssertions();
+
+        Livewire::component('counter', Counter::class);
+
+        view('key-test')->render();
+    }
+
     public function test_unknown_component_throws_exception()
     {
         $this->expectException(\ErrorException::class);
