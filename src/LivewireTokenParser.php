@@ -20,7 +20,6 @@ class LivewireTokenParser extends AbstractTokenParser
         'persist',
         'endpersist',
         'component',
-        'script',
     ];
 
     public function parse(Token $token)
