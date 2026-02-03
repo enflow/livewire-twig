@@ -9,8 +9,8 @@
         }
     ],
     "require": {
-        "php": "^8.3",
-        "livewire/livewire": "^3.0",
+        "php": "^8.4",
+        "livewire/livewire": "^3.0|^4.0",
         "twig/twig": ">=3.21.1"
     },
     "require-dev": {
